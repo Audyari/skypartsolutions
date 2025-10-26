@@ -31,6 +31,172 @@ const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
     supabase ? (
       frameworks ? (
         <>
+          {/* 🚀 Hero Section */}
+
+          <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+              <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Premium <span class="text-blue-300">Aircraft Parts</span>
+              </h1>
+              <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Your trusted partner for quality aviation components and
+                reliable solutions
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="/products"
+                  class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-blue-50 transition"
+                >
+                  Browse Products
+                </a>
+                <a
+                  href="/contact"
+                  class="border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-600 transition"
+                >
+                  Get Quote
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* 🎯 Features/Services Section */}
+
+          <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+              <h2 class="text-3xl font-bold text-center mb-12">
+                Why Choose SkyPartSolutions?
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">✈</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">Certified Quality</h3>
+                  <p class="text-gray-600">
+                    All parts meet aviation standards and certifications
+                  </p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🚚</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">Fast Delivery</h3>
+                  <p class="text-gray-600">
+                    Global shipping with expedited options available
+                  </p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🔧</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">Expert Support</h3>
+                  <p class="text-gray-600">
+                    Technical assistance from aviation specialists
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 📦 Featured Products Section */}
+
+          <section class="py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4">
+              <h2 class="text-3xl font-bold text-center mb-12">
+                Featured Products
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                  <h3 class="text-xl font-bold mb-2">Engine Components</h3>
+                  <p class="text-gray-600 mb-4">
+                    High-performance engine parts and accessories
+                  </p>
+                  <a
+                    href="/products/engine"
+                    class="text-blue-600 font-bold hover:underline"
+                  >
+                    View Products →
+                  </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                  <h3 class="text-xl font-bold mb-2">Avionics</h3>
+                  <p class="text-gray-600 mb-4">
+                    Navigation and communication systems
+                  </p>
+                  <a
+                    href="/products/avionics"
+                    class="text-blue-600 font-bold hover:underline"
+                  >
+                    View Products →
+                  </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                  <h3 class="text-xl font-bold mb-2">Landing Gear</h3>
+                  <p class="text-gray-600 mb-4">
+                    Reliable landing systems and components
+                  </p>
+                  <a
+                    href="/products/landing-gear"
+                    class="text-blue-600 font-bold hover:underline"
+                  >
+                    View Products →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 🏢 About Section */}
+
+          <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 class="text-3xl font-bold mb-6">
+                    Trusted Aviation Partner
+                  </h2>
+                  <p class="text-gray-600 mb-4">
+                    With years of experience in the aviation industry,
+                    SkyPartSolutions delivers premium aircraft components to
+                    airlines, MROs, and private operators worldwide.
+                  </p>
+                  <p class="text-gray-600 mb-6">
+                    Our commitment to quality, safety, and customer satisfaction
+                    makes us the preferred choice for aviation parts sourcing.
+                  </p>
+                  <a
+                    href="/about"
+                    class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+                  >
+                    Learn More About Us
+                  </a>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                  <span class="text-gray-500">[Company Image/Photo]</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 📞 CTA Section */}
+
+          <section class="py-16 bg-blue-600 text-white">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+              <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+              <p class="text-xl mb-8">
+                Contact us for quotes, technical specifications, or consultation
+              </p>
+              <a
+                href="/contact"
+                class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-blue-50 transition"
+              >
+                Contact Us Today
+              </a>
+            </div>
+          </section>
+
+          {/* awalan */}
+
           <h1 class="mb-8 text-4xl font-bold">
             Vote for Your Favorite Web Framework
           </h1>
@@ -63,7 +229,10 @@ const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
       )
     ) : (
       <>
-        <Alert title="Finish setting up your new site" text="Before your website is ready, you must complete the steps from the guide below to create, populate, and connect your Supabase database."/>
+        <Alert
+          title="Finish setting up your new site"
+          text="Before your website is ready, you must complete the steps from the guide below to create, populate, and connect your Supabase database."
+        />
         {connectGuide && <Guide guide={connectGuide} />}
       </>
     )
