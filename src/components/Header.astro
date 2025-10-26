@@ -1,26 +1,57 @@
-<header>
-  <div>
-    <!-- Logo -->
-    <div>
-      <a href="/">
-        <span>✈</span>
-        <span>SkyPartSolutions</span>
-      </a>
-    </div>
+<header class="bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+            <span class="text-white font-bold text-sm">✈</span>
+          </div>
+          <span class="text-xl font-bold text-gray-900">
+            SkyPart<span class="text-blue-600">Solutions</span>
+          </span>
+        </a>
+      </div>
 
-    <!-- Navigation Menu -->
-    <nav>
-      <a href="/">Home</a>
-      <a href="/products">Products</a>
-      <a href="/categories">Categories</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
+      <!-- Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-gray-700 hover:text-blue-600 font-medium transition duration-150">
+          Home
+        </a>
+        <a href="/products" class="text-gray-700 hover:text-blue-600 font-medium transition duration-150">
+          Products
+        </a>
+        <a href="/categories" class="text-gray-700 hover:text-blue-600 font-medium transition duration-150">
+          Categories
+        </a>
+        <a href="/about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-150">
+          About
+        </a>
+        <a href="/contact" class="text-gray-700 hover:text-blue-600 font-medium transition duration-150">
+          Contact
+        </a>
+      </nav>
 
-    <!-- CTA Buttons -->
-    <div>
-      <a href="/quote">Get Quote</a>
-      <a href="/search">Search</a>
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4">
+        <a href="/quote" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-150 font-medium">
+          Get Quote
+        </a>
+        <a href="/search" class="text-gray-600 hover:text-blue-600 transition duration-150">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="text-gray-600 hover:text-blue-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </header>
