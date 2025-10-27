@@ -44,16 +44,16 @@ const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
               </p>
               <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/products"
+                  href="/catalog"
                   class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-blue-50 transition"
                 >
-                  Browse Products
+                  Browse Catalog
                 </a>
                 <a
                   href="/contact"
                   class="border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-600 transition"
                 >
-                  Get Quote
+                  Get Contact
                 </a>
               </div>
             </div>
@@ -171,9 +171,6 @@ const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
                     Learn More About Us
                   </a>
                 </div>
-                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                  <span class="text-gray-500">[Company Image/Photo]</span>
-                </div>
               </div>
             </div>
           </section>
@@ -197,23 +194,7 @@ const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
 
           {/* awalan */}
 
-          <h1 class="mb-8 text-4xl font-bold">
-            Vote for Your Favorite Web Framework
-          </h1>
-          <table class="w-full text-left">
-            <thead>
-              <tr class="font-mono text-base border-t border-b">
-                <th>Name Audyari W</th>
-                <th>Logo</th>
-                <th>Likes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {frameworks?.map((framework) => (
-                <TableRow framework={framework} />
-              ))}
-            </tbody>
-          </table>
+         
         </>
       ) : (
         <>
