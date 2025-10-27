@@ -14,5 +14,9 @@ export default defineConfig({
       allowedHosts: ['.netlify.app']
     }
   },
-  adapter: netlify()
+  adapter: netlify(),
+  // TAMBAH INI:
+  typescript: {
+    strict: false
+  }
 });
