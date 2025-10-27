@@ -1,0 +1,153 @@
+---
+import Layout from "../../components/Layout.astro";
+
+export const prerender = false;
+
+const url = Astro.url;
+const partNumber = url.searchParams.get("part_number");
+const description = url.searchParams.get("description");
+const aircraft = url.searchParams.get("aircraft");
+---
+
+<Layout title="Request Quote">
+  
+    <main class="max-w-2xl mx-auto px-4 py-8 mt-12 mb-12">
+    <h1 class="text-3xl font-bold text-gray-100 mb-2">Request Quote</h1>
+    <p class="text-gray-400 mb-8">
+      Get pricing for your selected aircraft part
+    </p>
+
+    <!-- Part Info Card -->
+    {
+      partNumber && (
+        <div class="bg-gray-800 rounded-lg p-6 mb-8 border border-gray-700">
+          <h2 class="text-xl font-semibold text-gray-100 mb-4">
+            Selected Part
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-gray-400">Part Number:</span>
+              <p class="text-gray-100 font-medium">{partNumber}</p>
+            </div>
+            <div>
+              <span class="text-gray-400">Description:</span>
+              <p class="text-gray-100">{description}</p>
+            </div>
+            <div>
+              <span class="text-gray-400">Aircraft:</span>
+              <p class="text-gray-100">{aircraft}</p>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <!-- Quote Form -->
+    <form
+      class="bg-gray-800 rounded-lg p-6 border border-gray-700"
+      method="POST"
+      action="/api/quote"
+    >
+      <input type="hidden" name="part_number" value={partNumber || ""} />
+
+      <h2 class="text-xl font-semibold text-gray-100 mb-6">Your Information</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Company Name *</label
+          >
+          <input
+            type="text"
+            name="company_name"
+            required
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Contact Person *</label
+          >
+          <input
+            type="text"
+            name="contact_person"
+            required
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Email *</label
+          >
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Phone *</label
+          >
+          <input
+            type="tel"
+            name="phone"
+            required
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Quantity Needed *</label
+          >
+          <input
+            type="number"
+            name="quantity"
+            required
+            min="1"
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2"
+            >Urgency *</label
+          >
+          <select
+            name="urgency"
+            required
+            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="standard">Standard (3-5 days)</option>
+            <option value="urgent">Urgent (24-48 hours)</option>
+            <option value="aog">AOG - Immediate</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-300 mb-2"
+          >Additional Notes</label
+        >
+        <textarea
+          name="notes"
+          rows="3"
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Any special requirements or notes..."></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+      >
+        Submit Quote Request
+      </button>
+    </form>
+  </main>
+</Layout>

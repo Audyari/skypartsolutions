@@ -1,126 +1,161 @@
 ---
 import { supabase } from "../../utils/database";
 import Layout from "../../components/Layout.astro";
+
 export const prerender = false;
 
+// Fetch data
 let parts = [];
 let partsError = null;
 
-// Fetch data dari database
-if (supabase) {
-  const { data, error } = await supabase
-    .from("aircraft_parts")
-    .select("*")
-    .order("part_number", { ascending: true });
-  parts = data;
+try {
+  if (supabase) {
+    const { data, error } = await supabase
+      .from("aircraft_parts")
+      .select("*")
+      .order("part_number", { ascending: true });
+    
+    parts = data || [];
+    partsError = error;
+  }
+} catch (error) {
   partsError = error;
+  parts = [];
 }
 ---
 
 <Layout>
   <main class="flex-grow">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-12 mt-12">
-        <h1 class="text-3xl font-bold mb-2 text-gray-100">Aircraft Parts Catalog</h1>
-        <p class="text-lg text-gray-200 max-w-3xl mx-auto">
-          Browse our complete inventory of certified and quality aircraft parts
+      <div class="text-center mb-8 mt-8">
+        <h1 class="text-2xl font-bold mb-2 text-gray-100">
+          Aircraft Parts Catalog
+        </h1>
+        <p class="text-gray-200 max-w-3xl mx-auto">
+          Browse our complete inventory of certified aircraft parts
         </p>
       </div>
 
-      {
-        partsError && (
-          <div class="bg-red-50 border border-red-500 text-red-600 px-4 py-3 rounded-lg mb-8">
-            <strong>Database Error:</strong> {partsError.message}
-          </div>
-        )
-      }
+      {partsError && (
+        <div class="bg-red-50 border border-red-500 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm">
+          <strong>Database Error:</strong> {partsError.message}
+        </div>
+      )}
 
-      {
-        parts && parts.length > 0 ? (
-          <table class="w-full divide-y divide-gray-200">
+      {parts && parts.length > 0 ? (
+        <div class="overflow-x-auto border border-gray-600 rounded-lg">
+          <table class="w-full divide-y divide-gray-200 min-w-[1000px] text-sm"> <!-- Lebih kecil -->
             <thead class="bg-gray-700">
               <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Part Number
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Description
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Aircraft
-                </th>
-                <th class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Qty
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Condition
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Location
-                </th>
-                <th class="px-6 py-3 text-center text-xs font-medium text-gray-100 uppercase tracking-wider">
-                  Action
-                </th>
+                <th class="px-3 py-2 text-left text-xs font-medium text-gray-100 uppercase tracking-wider w-[100px]">Part No</th>
+                <th class="px-3 py-2 text-left text-xs font-medium text-gray-100 uppercase tracking-wider w-[180px]">Description</th>
+                <th class="px-3 py-2 text-left text-xs font-medium text-gray-100 uppercase tracking-wider w-[120px]">Aircraft</th>
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-100 uppercase tracking-wider w-[60px]">Qty</th>
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-100 uppercase tracking-wider w-[60px]">UOM</th>
+                <th class="px-3 py-2 text-left text-xs font-medium text-gray-100 uppercase tracking-wider w-[80px]">Condition</th>
+                <th class="px-3 py-2 text-left text-xs font-medium text-gray-100 uppercase tracking-wider w-[80px]">Location</th>
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-100 uppercase tracking-wider w-[80px]">Image</th>
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-100 uppercase tracking-wider w-[100px]">Action</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 bg-gray-800">
               {parts.map((part) => (
-                <tr key={part.id} class="bg-gray-800">
-                  <td class="px-6 py-4 text-sm font-medium text-gray-100">
+                <tr key={part.id} class="hover:bg-gray-750 transition-colors">
+                  <!-- Part Number -->
+                  <td class="px-3 py-3 text-xs font-medium text-gray-100 whitespace-nowrap">
                     {part.part_number}
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-300">
+                  
+                  <!-- Description -->
+                  <td class="px-3 py-3 text-xs text-gray-300 break-words max-w-[180px]">
                     {part.description}
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-300">
-                    <span class="bg-blue-500 text-blue-100 px-2 py-1 rounded-full text-xs font-medium">
+                  
+                  <!-- Aircraft Effectivity -->
+                  <td class="px-3 py-3 text-xs text-gray-300">
+                    <span class="bg-blue-500 text-blue-100 px-2 py-1 rounded text-xs font-medium break-words">
                       {part.aircraft_effectivity}
                     </span>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-300 text-center">
-                    <span class="bg-green-500 text-green-100 px-2 py-1 rounded-full text-xs font-medium">
-                      {part.quantity} {part.uom}
+                  
+                  <!-- Quantity -->
+                  <td class="px-3 py-3 text-xs text-gray-300 text-center">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-500 text-green-100">
+                      {part.quantity}
                     </span>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-300">
+                  
+                  <!-- UOM -->
+                  <td class="px-3 py-3 text-xs text-gray-300 text-center">
+                    {part.uom}
+                  </td>
+                  
+                  <!-- Condition -->
+                  <td class="px-3 py-3 text-xs text-gray-300">
                     {part.condition}
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-300">
-                    <span class="bg-yellow-500 text-yellow-100 px-2 py-1 rounded-full text-xs font-medium">
+                  
+                  <!-- Location -->
+                  <td class="px-3 py-3 text-xs text-gray-300">
+                    <span class="bg-purple-500 text-purple-100 px-2 py-1 rounded text-xs font-medium">
                       {part.location}
                     </span>
                   </td>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-300 text-center">
-                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium hover:bg-blue-700">
-                      Request Quote
-                    </button>
+
+                  <!-- Picture -->
+                  <td class="px-3 py-3 text-center">
+                    {part.image_url ? (
+                      <a href={part.image_url} target="_blank" class="block transition-all hover:scale-105">
+                        <img
+                          src={part.image_url}
+                          alt={part.part_number}
+                          class="w-12 h-12 object-cover rounded border border-gray-600 hover:border-blue-500 mx-auto"
+                        />
+                      </a>
+                    ) : (
+                      <div class="w-12 h-12 bg-gray-700 rounded border border-gray-600 flex items-center justify-center mx-auto">
+                        <span class="text-gray-400 text-[10px]">No Image</span>
+                      </div>
+                    )}
+                  </td>
+
+                  <!-- Request Quote -->
+                  <td class="px-3 py-3 text-center">
+                    <a
+                      href={`/quote?part_number=${part.part_number}&description=${encodeURIComponent(part.description)}&aircraft=${encodeURIComponent(part.aircraft_effectivity)}`}
+                      class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1.5 rounded text-xs inline-flex items-center transition-colors whitespace-nowrap"
+                    >
+                      <span class="mr-1">Quote</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </a>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        ) : (
-          <div class="p-3 text-center text-gray-200">
-            <p class="mb-2">No parts found in inventory</p>
-            <p>Please check back later or contact our sales team.</p>
-          </div>
-        )
-      }
+        </div>
+      ) : !partsError && (
+        <div class="p-6 text-center text-gray-200 bg-gray-800 rounded-lg">
+          <p class="mb-1 text-sm">No parts found in inventory</p>
+          <p class="text-gray-400 text-xs">Please check back later or contact our sales team.</p>
+        </div>
+      )}
 
-      <div
-        class="bg-gray-900 border border-gray-600 rounded-lg p-4 mt-8 text-center"
-      >
-        <h3 class="mb-2 text-blue-600 text-lg">
+      <div class="bg-gray-900 border border-gray-600 rounded-lg p-4 mt-6 text-center">
+        <h3 class="mb-1 text-blue-400 text-sm font-semibold">
           Can't find what you're looking for?
         </h3>
-        <p class="mb-2 text-gray-300">
-          Contact our sales team for special requests or bulk orders
+        <p class="mb-3 text-gray-300 text-xs">
+          Contact our sales team for special requests
         </p>
-        <button
-          class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium hover:bg-blue-700"
+        <a
+          href="/contact"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full text-xs font-medium transition-colors inline-block"
         >
           Contact Sales
-        </button>
+        </a>
       </div>
     </div>
   </main>

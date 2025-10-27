@@ -1,0 +1,18 @@
+---
+export interface Props {
+  imageUrl: string;
+  partNumber: string;
+}
+
+const { imageUrl, partNumber } = Astro.props;
+---
+
+<div class="image-modal">
+  <a href={imageUrl} target="_blank" class="block">
+    <img
+      src={imageUrl}
+      alt={partNumber}
+      class="w-32 h-32 object-cover rounded-lg border-2 border-gray-600 hover:border-blue-500 hover:shadow-xl cursor-zoom-in transition-all"
+    />
+  </a>
+</div>
